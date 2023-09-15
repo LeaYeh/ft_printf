@@ -97,6 +97,9 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 		ret[i++] = tab->sign[0];
 	tmp = ft_format_padding(
 			num_str + ft_strlen(tab->sign), '0', perc_len, FALSE);
+	ret[perc_len + ft_strlen(tab->sign)] = '\0';
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
+	free(tmp);
+	free(num_str);
 	return (ret);
 }
