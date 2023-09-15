@@ -54,5 +54,4 @@ dkms.conf
 # testing file
 *test*
 build/
-libft/
 .vscode/
