@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 17:22:27 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/15 21:26:04 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 	int		i;
 	char	*tmp;
 
-	if (!num_str)
-		return (NULL);
+	if (ft_strlen(num_str) >= (size_t)perc_len)
+		return (ft_strdup(num_str));
 	if (num_str[0] == '-')
 		tab->sign = "-";
 	ret = (char *)malloc(sizeof(char) * (perc_len + ft_strlen(tab->sign) + 1));
