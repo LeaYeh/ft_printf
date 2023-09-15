@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 21:26:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/15 21:56:49 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	_setup_print_flags(t_print_tab *tab, const char *c)
 
 void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
 {
-	const char	*formatters = "udcsupxX%";
+	const char	*formatters = "udicsupxX%";
 	int			i;
 
 	ft_init_print_table(tab);

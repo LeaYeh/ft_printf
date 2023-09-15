@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:08:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 20:32:16 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/15 21:52:02 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ char	*ft_eval_format(const char *fmt, int i, t_print_tab *tab)
 	ret = NULL;
 	ft_setup_print_table(fmt, i, tab);
 	if (tab->type == '%')
-		ret = "%";
+	{
+		tab->total_len += 1;
+		ret = ft_strdup("%");
+	}
 	else if (tab->type == 'c')
 		ret = ft_format_char(va_arg(tab->args, int), tab);
 	else if (tab->type == 's')
 		ret = ft_format_string(va_arg(tab->args, char *), tab);
-	else if (tab->type == 'd')
+	else if (tab->type == 'd' || tab->type == 'i')
 		ret = ft_format_decimal(va_arg(tab->args, int), tab);
 	else if (tab->type == 'u')
 		ret = NULL;
