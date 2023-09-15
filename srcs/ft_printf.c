@@ -23,7 +23,7 @@ char	*ft_eval_format(const char *fmt, int i, t_print_tab *tab)
 	ret = NULL;
 	ft_setup_print_table(fmt, i, tab);
 	if (tab->type == '%')
-		ret = ft_format_char('%', tab);
+		ret = "%";
 	else if (tab->type == 'c')
 		ret = ft_format_char(va_arg(tab->args, int), tab);
 	else if (tab->type == 's')
@@ -38,7 +38,18 @@ char	*ft_eval_format(const char *fmt, int i, t_print_tab *tab)
 		ret = NULL;
 	else if (tab->type == 'X')
 		ret = NULL;
+	if (ret == NULL)
+		free(tab);
 	return (ret);
+}
+
+void	_print_out(const char *fmt, int i, t_print_tab *tab)
+{
+	char		*formatted_str;
+
+	formatted_str = ft_eval_format(fmt, i + 1, tab);
+	ft_putstr_fd(formatted_str, 1);
+	free(formatted_str);
 }
 
 int	ft_printf(const char *format, ...)
@@ -57,7 +68,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			ft_putstr_fd(ft_eval_format(format, i + 1, tab), 1);
+			_print_out(format, i + 1, tab);
 			i += tab->fmt_len;
 			ret += tab->total_len;
 		}

@@ -16,8 +16,15 @@ char	*ft_format_string(char *s, t_print_tab *tab)
 {
 	char		*ret;
 	const char	pad_char = ' ';
+	char		*tmp;
 
-	tab->total_len = ft_max(tab->width, ft_strlen(s));
-	ret = ft_format_padding(s, pad_char, tab->total_len, tab->f_dash);
+	if (!s)
+		s = "(null)";
+	tab->total_len = tab->width;
+	if (!tab->width)
+		tab->total_len = ft_min(ft_strlen(s), tab->perc_len);
+	tmp = ft_substr(s, 0, tab->perc_len);
+	ret = ft_format_padding(tmp, pad_char, tab->total_len, tab->f_dash);
+	free(tmp);
 	return (ret);
 }

@@ -59,8 +59,10 @@ char	*ft_format_padding(
 	char	*ret;
 	int		len;
 
+	if (!str)
+		return (NULL);
 	if (ft_strlen(str) >= (size_t)total_len)
-		return (str);
+		return (ft_strdup(str));
 	ret = (char *)malloc(sizeof(char) * (total_len + 1));
 	if (!ret)
 		return (NULL);

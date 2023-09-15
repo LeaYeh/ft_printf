@@ -56,5 +56,6 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab);
 /* utils */
 int		ft_in_substr(const char c, const char *sub);
 int		ft_max(int a, int b);
+int		ft_min(int a, int b);
 
 #endif

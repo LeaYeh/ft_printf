@@ -37,13 +37,13 @@ $(BUILD_DIR)/%.o: $(BONUS_DIR)/%.c
 
 all:		$(NAME)
 
-bonus:		all
-			@if [ -n "$(BONUS_OBJS)" ]; then \
-				echo "Bonus objects found: $(BONUS_OBJS)"; \
-				$(AR) -rs $(NAME) $(BONUS_OBJS); \
-			else \
-				echo "No bonus objects found. Skipping."; \
-			fi
+# bonus:		all
+# 			@if [ -n "$(BONUS_OBJS)" ]; then \
+# 				echo "Bonus objects found: $(BONUS_OBJS)"; \
+# 				$(AR) -rs $(NAME) $(BONUS_OBJS); \
+# 			else \
+# 				echo "No bonus objects found. Skipping."; \
+# 			fi
 
 clean:
 			@make -C $(LIBFT_DIR) clean
