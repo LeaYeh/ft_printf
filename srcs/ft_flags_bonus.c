@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 18:03:07 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 23:06:23 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
 	}
 	tab->fmt_len = i + 1;
 	tab->type = fmt[start + i];
+	if (ft_tolower(tab->type) == 'x')
+		tab->sign = "";
+	if (ft_tolower(tab->type) == 'p')
+		tab->f_hash = TRUE;
 }
 
 char	*ft_format_padding(
@@ -106,5 +110,20 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
 	ret[perc_len + ft_strlen(tab->sign)] = '\0';
 	free(tmp);
+	return (ret);
+}
+
+char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab)
+{
+	char	*ret;
+
+	if (!s)
+		return (NULL);
+	if (!tab->f_hash)
+		return (ft_strdup(s));
+	if (is_upper)
+		ret = ft_strjoin("0X", s);
+	else
+		ret = ft_strjoin("0x", s);
 	return (ret);
 }

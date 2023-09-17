@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_format_hex.c                                    :+:      :+:    :+:   */
+/*   ft_format_addr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:59:33 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 23:04:26 by lyeh             ###   ########.fr       */
+/*   Created: 2023/09/17 22:39:31 by lyeh              #+#    #+#             */
+/*   Updated: 2023/09/17 23:09:56 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_format_hex(unsigned int n, t_bool is_upper, t_print_tab *tab)
+char    *_skip_hexzero(char *num_str)
+{
+	while (*num_str == '0')
+		num_str++;
+	return (ft_strdup(num_str));
+}
+
+char	*ft_format_addr(unsigned long int n, t_print_tab *tab)
 {
 	char	*ret;
 	char	*num_str;
@@ -23,10 +30,10 @@ char	*ft_format_hex(unsigned int n, t_bool is_upper, t_print_tab *tab)
 	pad_char = ' ';
 	if (tab->f_zero_pad)
 		pad_char = '0';
-	num_str = ft_utox(n, 8, is_upper);
-	formatted_perc = ft_format_persicion(num_str, tab->perc_len, tab);
-	formatted_suffix = ft_format_suffix(formatted_perc, is_upper, tab);
-	tab->total_len = ft_max(tab->width, ft_strlen(num_str));
+	num_str = ft_utox(n, 16, FALSE);
+	formatted_perc = _skip_hexzero(num_str);
+	formatted_suffix = ft_format_suffix(formatted_perc, FALSE, tab);
+	tab->total_len = ft_max(tab->width, ft_strlen(formatted_perc));
 	ret = ft_format_padding(
 			formatted_suffix,
 			pad_char,

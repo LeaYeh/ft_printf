@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:08:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 18:53:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 23:05:29 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ char	*ft_eval_format(t_print_tab *tab)
 	else if (tab->type == 'u')
 		ret = ft_format_uint(va_arg(tab->args, unsigned int), tab);
 	else if (tab->type == 'p')
-		ret = NULL;
+		ret = ft_format_addr(
+			va_arg(tab->args, unsigned long int), tab);
 	else if (tab->type == 'x')
 		ret = ft_format_hex(va_arg(tab->args, unsigned int), FALSE, tab);
 	else if (tab->type == 'X')
 		ret = ft_format_hex(va_arg(tab->args, unsigned int), TRUE, tab);
-	if (ret == NULL)
-		free(tab);
 	return (ret);
 }
 
