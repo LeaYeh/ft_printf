@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:52:47 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 15:55:05 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 18:02:38 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,17 @@ int	ft_min(int a, int b)
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+long long int	ft_pow(int base, int n)
+{
+	long long int	ret;
+
+	ret = 1;
+	while (n > 0)
+	{
+		ret *= base;
+		n--;
+	}
+	return (ret);
 }

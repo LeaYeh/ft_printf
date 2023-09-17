@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:51:42 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 15:54:21 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 18:29:51 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_print_table(t_print_tab *tab)
 	tab->f_perc_fmt = FALSE;
 	tab->f_perc_arg = FALSE;
 	tab->f_pointer = FALSE;
-	tab->f_hex_suffix = FALSE;
+	tab->f_hash = FALSE;
 }
 
 void	ft_print_table_status(t_print_tab *tab)
@@ -43,5 +43,5 @@ void	ft_print_table_status(t_print_tab *tab)
 	printf("\tf_perc_fmt:   %d\n", tab->f_perc_fmt);
 	printf("\tf_perc_arg:   %d\n", tab->f_perc_arg);
 	printf("\tf_pointer:    %d\n", tab->f_pointer);
-	printf("\tf_hex_suffix: %d\n", tab->f_hex_suffix);
+	printf("\tf_hash:       %d\n", tab->f_hash);
 }

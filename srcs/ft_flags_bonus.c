@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 21:56:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 18:03:07 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	_setup_print_flags(t_print_tab *tab, const char *c)
 	else if (*c == '*')
 		tab->f_perc_arg = TRUE;
 	else if (*c == '#')
-		tab->f_hex_suffix = TRUE;
+		tab->f_hash = TRUE;
 	else if (ft_isdigit(*c))
 	{
 		if (tab->f_perc_fmt && !tab->perc_len)
@@ -87,10 +87,14 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 	int		i;
 	char	*tmp;
 
-	if (ft_strlen(num_str) >= (size_t)perc_len)
-		return (ft_strdup(num_str));
 	if (num_str[0] == '-')
 		tab->sign = "-";
+	if (ft_strlen(num_str) >= (size_t)perc_len)
+	{
+		if (ft_strncmp(tab->sign, "+", 1) == 0)
+			return (ft_strjoin(tab->sign, num_str));
+		return (ft_strdup(num_str));
+	}
 	ret = (char *)malloc(sizeof(char) * (perc_len + ft_strlen(tab->sign) + 1));
 	if (!ret)
 		return (NULL);
