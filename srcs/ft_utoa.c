@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 23:02:44 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 16:41:21 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/17 23:15:01 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ static size_t	_get_num_len(unsigned long num)
 	len = 0;
 	if (num == 0)
 		len = 1;
-	else if (num < 0)
-	{
-		num *= -1;
-		len++;
-	}
 	while (num > 0)
 	{
 		num /= 10;
@@ -44,12 +39,7 @@ char	*ft_utoa(unsigned long long_n)
 	ptr[len] = '\0';
 	if (long_n == 0)
 		ptr[0] = '0';
-	else if (long_n < 0)
-	{
-		ptr[0] = '-';
-		long_n *= -1;
-	}
-	while (long_n > 0)
+	while (long_n != 0)
 	{
 		ptr[len - 1] = long_n % 10 + '0';
 		long_n /= 10;
