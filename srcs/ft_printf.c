@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:08:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/18 13:10:41 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/18 15:52:52 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	_print_out(const char *fmt, int i, t_print_tab *tab)
 
 	ft_setup_print_table(fmt, i, tab);
 	formatted_str = ft_eval_format(tab);
-	ft_putstr_fd(formatted_str, 1);
+	if (!ft_strlen(formatted_str) && tab->type == 'c')
+		ft_putchar_fd(0, 1);
+	else
+		ft_putstr_fd(formatted_str, 1);
 	free(formatted_str);
 }
 

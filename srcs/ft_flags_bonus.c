@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 23:06:23 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/18 15:53:14 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_format_padding(
 
 	if (!str)
 		return (NULL);
-	if (ft_strlen(str) >= (size_t)total_len)
+	if (!ft_strlen(str) || ft_strlen(str) >= (size_t)total_len)
 		return (ft_strdup(str));
 	ret = (char *)malloc(sizeof(char) * (total_len + 1));
 	if (!ret)
