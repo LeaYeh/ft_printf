@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:01:22 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/15 21:43:43 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/18 11:20:48 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*ft_format_string(char *s, t_print_tab *tab)
 
 	if (!s)
 		s = "(null)";
-	if (tab->width)
-		tab->total_len = ft_max(ft_strlen(s), tab->width);
-	else if (tab->perc_len)
+	if (tab->f_perc_fmt)
 		tab->total_len = ft_min(ft_strlen(s), tab->perc_len);
+	else if (tab->width)
+		tab->total_len = ft_max(ft_strlen(s), tab->width);
 	else
 		tab->total_len = ft_strlen(s);
 	tmp = ft_substr(s, 0, tab->total_len);
