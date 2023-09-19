@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 14:59:33 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/18 13:00:50 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/18 17:18:25 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ char	*ft_format_hex(unsigned int n, t_bool is_upper, t_print_tab *tab)
 	formatted_perc = ft_format_persicion(num_str, tab->perc_len, tab);
 	formatted_suffix = ft_format_suffix(formatted_perc, is_upper, tab);
 	tab->total_len = ft_max(tab->width, ft_strlen(num_str));
-	ret = ft_format_padding(
-			formatted_suffix,
-			pad_char,
-			tab->total_len,
-			tab->f_dash);
+	ret = ft_format_padding(formatted_suffix, pad_char, tab);
 	free(num_str);
 	free(formatted_perc);
 	free(formatted_suffix);

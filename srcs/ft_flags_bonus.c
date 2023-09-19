@@ -6,82 +6,37 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/18 15:53:14 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/18 17:40:37 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	_setup_print_flags(t_print_tab *tab, const char *c)
-{
-	if (*c == '0' && !tab->f_perc_fmt && !tab->width)
-		tab->f_zero_pad = TRUE;
-	else if (*c == ' ')
-		tab->f_space_pad = TRUE;
-	else if (*c == '-')
-		tab->f_dash = TRUE;
-	else if (*c == '+')
-		tab->sign = "+";
-	else if (*c == '.')
-		tab->f_perc_fmt = TRUE;
-	else if (*c == '*')
-		tab->f_perc_arg = TRUE;
-	else if (*c == '#')
-		tab->f_hash = TRUE;
-	else if (ft_isdigit(*c))
-	{
-		if (tab->f_perc_fmt && !tab->perc_len)
-			tab->perc_len = ft_atoi(c);
-		else if (!tab->width)
-			tab->width = ft_atoi(c);
-	}
-}
-
-void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
-{
-	const char	*formatters = "udicsupxX%";
-	int			i;
-
-	ft_init_print_table(tab);
-	i = 0;
-	while (fmt[start + i] && !ft_in_substr(fmt[start + i], formatters))
-	{
-		_setup_print_flags(tab, fmt + (start + i));
-		i += 1;
-	}
-	tab->fmt_len = i + 1;
-	tab->type = fmt[start + i];
-	if (ft_tolower(tab->type) == 'x')
-		tab->sign = "";
-	if (ft_tolower(tab->type) == 'p')
-		tab->f_hash = TRUE;
-}
-
-char	*ft_format_padding(
-	char *str, char pad, int total_len, t_bool on_right)
+char	*ft_format_padding(char *str, char pad, t_print_tab *tab)
 {
 	char	*ret;
 	int		len;
 
 	if (!str)
 		return (NULL);
-	if (!ft_strlen(str) || ft_strlen(str) >= (size_t)total_len)
+	if ((!ft_strlen(str) && tab->type == 'c') || \
+			(int)ft_strlen(str) >= tab->total_len)
 		return (ft_strdup(str));
-	ret = (char *)malloc(sizeof(char) * (total_len + 1));
+	ret = (char *)malloc(sizeof(char) * (tab->total_len + 1));
 	if (!ret)
 		return (NULL);
 	len = ft_strlen(str);
-	if (on_right)
+	if (tab->f_dash || tab->f_hash)
 	{
 		ft_memcpy(ret, str, len);
-		ft_memset(ret + len, (int)pad, total_len - len);
+		ft_memset(ret + len, (int)pad, tab->total_len - len);
 	}
 	else
 	{
-		ft_memset(ret, (int)pad, total_len - len);
-		ft_memcpy(ret + (total_len - len), str, len);
+		ft_memset(ret, (int)pad, tab->total_len - len);
+		ft_memcpy(ret + (tab->total_len - len), str, len);
 	}
-	ret[total_len] = '\0';
+	ret[tab->total_len] = '\0';
 	return (ret);
 }
 
@@ -105,8 +60,7 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 	i = 0;
 	if (ft_strlen(tab->sign))
 		ret[i++] = tab->sign[0];
-	tmp = ft_format_padding(
-			num_str + ft_strlen(tab->sign), '0', perc_len, FALSE);
+	tmp = ft_format_padding(num_str + ft_strlen(tab->sign), '0', tab);
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
 	ret[perc_len + ft_strlen(tab->sign)] = '\0';
 	free(tmp);
