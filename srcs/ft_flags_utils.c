@@ -6,14 +6,19 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:09:13 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 12:10:58 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 15:23:45 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// void    ft_set_total_len(t_print_tab *tab)
-// {}
+// void    ft_set_total_len(const char *context, t_print_tab *tab)
+// {
+// 	if (tab->type == 'd')
+// 	{
+		
+// 	}
+// }
 
 char	*ft_handle_null(t_print_tab *tab)
 {

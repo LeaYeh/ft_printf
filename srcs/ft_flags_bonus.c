@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 13:08:35 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 15:27:57 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_format_padding(char *str, char pad, t_print_tab *tab)
 {
 	char	*ret;
 	int		len;
+	int		i;
 
 	if (!str)
 		return (NULL);
@@ -25,15 +26,21 @@ char	*ft_format_padding(char *str, char pad, t_print_tab *tab)
 	ret = (char *)malloc(sizeof(char) * (tab->total_len + 1));
 	if (!ret)
 		return (NULL);
+	i = 0;
+	if (ft_strlen(tab->sign))
+	{
+		ret[i++] = tab->sign[0];
+		str++;
+	}
 	len = ft_strlen(str);
 	if (tab->f_dash || tab->f_hash)
 	{
-		ft_memcpy(ret, str, len);
-		ft_memset(ret + len, (int)pad, tab->total_len - len);
+		ft_memcpy(ret + i, str, len);
+		ft_memset(ret + len + i, (int)pad, tab->total_len - len);
 	}
 	else
 	{
-		ft_memset(ret, (int)pad, tab->total_len - len);
+		ft_memset(ret + i, (int)pad, tab->total_len - len);
 		ft_memcpy(ret + (tab->total_len - len), str, len);
 	}
 	ret[tab->total_len] = '\0';
