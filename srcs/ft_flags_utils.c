@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:09:13 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 11:32:32 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 13:51:37 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_handle_null(t_print_tab *tab)
 		term = "(nil)";
 	else
 		term = "(null)";
-	if (tab->perc_len < (int)ft_strlen(term))
+	if (tab->f_perc_fmt && tab->perc_len < (int)ft_strlen(term))
 	{
 		tab->total_len = tab->width;
 		return (ft_strdup(""));
