@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:09:13 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 13:51:37 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 12:10:58 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,4 @@ char	*ft_handle_null(t_print_tab *tab)
 	tab->total_len = ft_max(ft_strlen(term), tab->width);
 	return (ft_strdup(term));
 }
+

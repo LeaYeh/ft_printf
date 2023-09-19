@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/18 17:40:37 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 13:08:35 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,13 @@ char	*ft_format_padding(char *str, char pad, t_print_tab *tab)
 	return (ret);
 }
 
-char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
+char	*_format_perc_num(char *num_str, t_print_tab *tab)
 {
 	char	*ret;
-	int		i;
 	char	*tmp;
+	int		i;
 
-	if (num_str[0] == '-')
-		tab->sign = "-";
-	if (ft_strlen(num_str) >= (size_t)perc_len)
-	{
-		if (ft_strncmp(tab->sign, "+", 1) == 0)
-			return (ft_strjoin(tab->sign, num_str));
-		return (ft_strdup(num_str));
-	}
-	ret = (char *)malloc(sizeof(char) * (perc_len + ft_strlen(tab->sign) + 1));
+	ret = (char *)malloc(sizeof(char) * (tab->perc_len + ft_strlen(tab->sign) + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -62,9 +54,27 @@ char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab)
 		ret[i++] = tab->sign[0];
 	tmp = ft_format_padding(num_str + ft_strlen(tab->sign), '0', tab);
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
-	ret[perc_len + ft_strlen(tab->sign)] = '\0';
+	ret[i + ft_strlen(tmp)] = '\0';
 	free(tmp);
 	return (ret);
+}
+
+char	*_format_perc_hex(char *num_str, t_print_tab *tab)
+{
+	if (ft_strlen(num_str) >= (size_t)tab->perc_len)
+	{
+		if (ft_strncmp(tab->sign, "+", 1) == 0)
+			return (ft_strjoin(tab->sign, num_str));
+		return (ft_strdup(num_str));
+	}
+	return (_format_perc_num(num_str, tab));
+}
+
+char	*ft_format_persicion(char *num_str, t_print_tab *tab)
+{
+	if (ft_tolower(tab->type) == 'x')
+		return (_format_perc_hex(num_str, tab));
+	return (_format_perc_num(num_str, tab));
 }
 
 char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab)
