@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 22:39:31 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/18 15:26:56 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 11:25:24 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_format_addr(unsigned long int n, t_print_tab *tab)
 	char	*formatted_perc;
 	char	*formatted_suffix;
 
+	if ((void *)n == NULL)
+		return (ft_handle_null(tab));
 	pad_char = ' ';
 	if (tab->f_zero_pad)
 		pad_char = '0';

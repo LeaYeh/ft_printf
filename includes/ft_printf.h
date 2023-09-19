@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:38:10 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/17 23:05:09 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 11:26:19 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab);
 char	*ft_format_padding(char *str, char pad, int total_len, t_bool on_right);
 char	*ft_format_persicion(char *num_str, int perc_len, t_print_tab *tab);
 char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab);
+
+char	*ft_handle_null(t_print_tab *tab);
 
 #endif
