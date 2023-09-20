@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/20 18:58:05 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/20 21:45:29 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab)
 
 	if (!s)
 		return (NULL);
-	if (!tab->f_hash)
+	if (!tab->f_hash || ft_strncmp(s, "0", 1) == 0)
 		return (ft_strdup(s));
 	if (is_upper)
 		ret = ft_strjoin("0X", s);
