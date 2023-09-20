@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/20 21:45:29 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/20 22:51:13 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,17 @@ char	*_format_perc_num(char *num_str, t_print_tab *tab)
 	char	*ret;
 	char	*tmp;
 	int		i;
-	int		perc_len;
 
-	perc_len = tab->perc_len;
-	if (!tab->f_perc_fmt && !tab->f_perc_shink)
-		perc_len = ft_strlen(num_str);
+	if (ft_strncmp(tab->sign, "-", 1) == 0)
+		num_str = num_str + ft_strlen(tab->sign);
+	tmp = ft_format_padding(num_str, '0', tab, TRUE);
 	ret = (char *)malloc(
-			sizeof(char) * (perc_len + ft_strlen(tab->sign) + 1));
+			sizeof(char) * (ft_strlen(tmp) + ft_strlen(tab->sign) + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;
 	if (ft_strlen(tab->sign))
 		ret[i++] = tab->sign[0];
-	if (ft_strncmp(tab->sign, "-", 1) == 0)
-		num_str = num_str + ft_strlen(tab->sign);
-	tmp = ft_format_padding(num_str, '0', tab, TRUE);
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
 	ret[i + ft_strlen(tmp)] = '\0';
 	free(tmp);
