@@ -17,7 +17,7 @@ AR			= ar
 RM			= rm -f
 
 # Define flags
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= 
 ARFLAGS		= -crs
 
 CFLAGS		+= -I$(INC_DIR) -I$(LIBFT_DIR)

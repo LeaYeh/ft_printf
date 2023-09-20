@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:07:15 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 16:36:46 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 17:23:07 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	*ft_format_int(int n, t_print_tab *tab)
 		tab->sign = "-";
 	num_str = ft_itoa(n);
 	formatted_perc = ft_format_persicion(num_str, tab);
-	tab->total_len = ft_max(2, tab->width, ft_strlen(formatted_perc));
-	ret = ft_format_padding(formatted_perc, pad_char, tab);
+	tab->total_len = ft_max(
+			2, tab->width, ft_strlen(formatted_perc));
+	ret = ft_format_padding(formatted_perc, pad_char, tab, FALSE);
 	free(num_str);
 	free(formatted_perc);
 	return (ret);

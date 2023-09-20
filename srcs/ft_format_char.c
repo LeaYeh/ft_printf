@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:58:27 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 16:36:31 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 17:22:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ char	*ft_format_char(char c, t_print_tab *tab)
 	tab->total_len = ft_max(2, tab->width, 1);
 	arg_val[0] = c;
 	arg_val[1] = '\0';
-	ret = ft_format_padding(arg_val, pad_char, tab);
+	ret = ft_format_padding(arg_val, pad_char, tab, FALSE);
 	return (ret);
 }

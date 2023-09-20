@@ -6,44 +6,105 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 15:27:57 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/20 18:39:01 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_format_padding(char *str, char pad, t_print_tab *tab)
+char	*_pad_on_right(char *str, char pad, size_t total_len)
+{
+	char	*ret;
+	int		len;
+
+	ret = (char *)malloc(sizeof(char) * (total_len + 1));
+	if (!ret || !str)
+		return (NULL);
+	len = ft_strlen(str);
+	ft_memcpy(ret, str, len);
+	ft_memset(ret + len, (int)pad, total_len - len);
+	ret[total_len] = '\0';
+	return (ret);
+}
+
+char	*_pad_on_left(char *str, char pad, size_t total_len)
 {
 	char	*ret;
 	int		len;
 	int		i;
 
-	if (!str)
-		return (NULL);
-	if ((!ft_strlen(str) && tab->type == 'c') || \
-			(int)ft_strlen(str) >= tab->total_len)
-		return (ft_strdup(str));
-	ret = (char *)malloc(sizeof(char) * (tab->total_len + 1));
-	if (!ret)
+	ret = (char *)malloc(sizeof(char) * (total_len + 1));
+	if (!ret || !str)
 		return (NULL);
 	i = 0;
-	if (ft_strlen(tab->sign))
+	if (str[0] == '-' && pad == '0')
+		ret[i++] = '-';
+	len = ft_strlen(str + i);
+	ft_memset(ret + i, (int)pad, total_len - len - i);
+	ft_memcpy(ret + (total_len - len), str + i, len);
+	ret[total_len] = '\0';
+	return (ret);
+}
+
+int		_get_shink_len(char *context, t_print_tab *tab)
+{
+	int	len;
+
+	len = ft_strlen(context);
+	if (tab->type == 'i' || tab->type == 'd' || tab->type == 'u' || \
+		ft_tolower(tab->type) == 'x')
 	{
-		ret[i++] = tab->sign[0];
-		str++;
+		if (*context++ == '0')
+			len--;
 	}
-	len = ft_strlen(str);
-	if (tab->f_dash || tab->f_hash)
-	{
-		ft_memcpy(ret + i, str, len);
-		ft_memset(ret + len + i, (int)pad, tab->total_len - len);
-	}
+	return (len);
+}
+
+int	_get_len_after_padding(char *context, t_print_tab *tab, t_bool is_perc)
+{
+	int	len;
+
+	len = tab->width;
+	if (tab->f_perc_shink && is_perc)
+		len = _get_shink_len(context, tab);
+	else if (is_perc)
+		len = tab->perc_len;
+	// else if (ft_strlen(tab->sign) && tab->f_dash)
+	// 	len = tab->width - ft_strlen(tab->sign);
+	else if (tab->f_space_pad)
+		len = ft_max(2, tab->width, 1 + ft_strlen(context));
 	else
-	{
-		ft_memset(ret + i, (int)pad, tab->total_len - len);
-		ft_memcpy(ret + (tab->total_len - len), str, len);
-	}
-	ret[tab->total_len] = '\0';
+		len = tab->width;
+	return (len);
+}
+
+t_bool	_is_pad_on_left(t_print_tab *tab, t_bool is_perc)
+{
+	if (!is_perc && (tab->f_dash || tab->f_hash))
+		return (FALSE);
+	if ((tab->type == 'd' || tab->type == 'i') && ft_strlen(tab->sign))
+		return (TRUE);
+	return (TRUE);
+}
+
+char	*ft_format_padding(
+	char *str, char pad, t_print_tab *tab, t_bool is_perc)
+{
+	char	*ret;
+	int		padded_len;
+
+	if (!str)
+		return (NULL);
+	padded_len = _get_len_after_padding(str, tab, is_perc);
+	if (tab->f_perc_shink && is_perc)
+		str = str + (ft_strlen(str) - padded_len);
+	if ((!ft_strlen(str) && tab->type == 'c') || \
+			(int)ft_strlen(str) >= padded_len)
+		return (ft_strdup(str));
+	if (_is_pad_on_left(tab, is_perc))
+		ret = _pad_on_left(str, pad, padded_len);
+	else
+		ret = _pad_on_right(str, pad, padded_len);
 	return (ret);
 }
 
@@ -52,14 +113,21 @@ char	*_format_perc_num(char *num_str, t_print_tab *tab)
 	char	*ret;
 	char	*tmp;
 	int		i;
+	int		perc_len;
 
-	ret = (char *)malloc(sizeof(char) * (tab->perc_len + ft_strlen(tab->sign) + 1));
+	perc_len = tab->perc_len;
+	if (!tab->f_perc_fmt && !tab->f_perc_shink)
+		perc_len = ft_strlen(num_str);
+	ret = (char *)malloc(
+			sizeof(char) * (perc_len + ft_strlen(tab->sign) + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;
 	if (ft_strlen(tab->sign))
 		ret[i++] = tab->sign[0];
-	tmp = ft_format_padding(num_str + ft_strlen(tab->sign), '0', tab);
+	if (ft_strncmp(tab->sign, "-", 1) == 0)
+		num_str = num_str + ft_strlen(tab->sign);
+	tmp = ft_format_padding(num_str, '0', tab, TRUE);
 	ft_memcpy(ret + i, tmp, ft_strlen(tmp));
 	ret[i + ft_strlen(tmp)] = '\0';
 	free(tmp);

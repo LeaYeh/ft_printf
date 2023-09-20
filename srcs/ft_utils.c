@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:52:47 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:40 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/19 17:02:05 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_in_substr(const char c, const char *sub)
 
 int	ft_max(int count, ...)
 {
-	va_list args;
-	int max_int;
-	int cur_num;
+	va_list	args;
+	int		max_int;
+	int		cur_num;
 
 	max_int = INT_MIN;
 	va_start(args, count);
@@ -45,9 +45,9 @@ int	ft_max(int count, ...)
 
 int	ft_min(int count, ...)
 {
-	va_list args;
-	int min_int;
-	int cur_num;
+	va_list	args;
+	int		min_int;
+	int		cur_num;
 
 	min_int = INT_MAX;
 	va_start(args, count);

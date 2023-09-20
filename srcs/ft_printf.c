@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:08:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 12:40:46 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/20 18:39:39 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ char	*ft_eval_format(t_print_tab *tab)
 
 	ret = NULL;
 	if (tab->type == '%')
-	{
-		tab->total_len += 1;
-		ret = ft_strdup("%");
-	}
+		ret = ft_format_char('%', tab);
 	else if (tab->type == 'c')
 		ret = ft_format_char(va_arg(tab->args, int), tab);
 	else if (tab->type == 's')
@@ -78,7 +75,6 @@ int	ft_printf(const char *format, ...)
 		i++;
 	}
 	va_end(tab->args);
-	// ft_print_table_status(tab);
 	free(tab);
 	return (ret);
 }

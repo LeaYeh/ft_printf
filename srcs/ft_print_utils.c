@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:51:42 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 14:02:09 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/20 18:01:49 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	ft_init_print_table(t_print_tab *tab)
 	tab->sign = "";
 	tab->type = '\0';
 	tab->f_zero_pad = FALSE;
+	tab->f_space_pad = FALSE;
 	tab->f_dash = FALSE;
 	tab->f_perc_fmt = FALSE;
-	tab->f_perc_arg = FALSE;
+	tab->f_perc_shink = FALSE;
 	tab->f_pointer = FALSE;
 	tab->f_hash = FALSE;
 }
@@ -41,7 +42,7 @@ void	ft_print_table_status(t_print_tab *tab)
 	printf("\tf_space_pad:  %d\n", tab->f_space_pad);
 	printf("\tf_dash:       %d\n", tab->f_dash);
 	printf("\tf_perc_fmt:   %d\n", tab->f_perc_fmt);
-	printf("\tf_perc_arg:   %d\n", tab->f_perc_arg);
+	printf("\tf_perc_shink: %d\n", tab->f_perc_shink);
 	printf("\tf_pointer:    %d\n", tab->f_pointer);
 	printf("\tf_hash:       %d\n", tab->f_hash);
 }
@@ -49,25 +50,27 @@ void	ft_print_table_status(t_print_tab *tab)
 void	_setup_print_flags(t_print_tab *tab, const char *c)
 {
 	if (*c == '0' && !tab->f_perc_fmt && !tab->width)
-			tab->f_zero_pad = TRUE;
+		tab->f_zero_pad = TRUE;
 	else if (*c == ' ')
-			tab->f_space_pad = TRUE;
+		tab->f_space_pad = TRUE;
 	else if (*c == '-')
-			tab->f_dash = TRUE;
+		tab->f_dash = TRUE;
 	else if (*c == '+')
-			tab->sign = "+";
+		tab->sign = "+";
 	else if (*c == '.')
-			tab->f_perc_fmt = TRUE;
-	else if (*c == '*')
-			tab->f_perc_arg = TRUE;
+		tab->f_perc_fmt = TRUE;
 	else if (*c == '#')
-			tab->f_hash = TRUE;
+		tab->f_hash = TRUE;
 	else if (ft_isdigit(*c))
 	{
 		if (tab->f_perc_fmt && !tab->perc_len)
-				tab->perc_len = ft_atoi(c);
+		{
+			if (*c == '0')
+				tab->f_perc_shink = TRUE;
+			tab->perc_len = ft_atoi(c);
+		}
 		else if (!tab->width)
-				tab->width = ft_atoi(c);
+			tab->width = ft_atoi(c);
 	}
 }
 
