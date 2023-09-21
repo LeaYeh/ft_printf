@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:51:42 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/20 18:01:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 17:05:12 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,7 @@ void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
 		tab->sign = "";
 	if (ft_tolower(tab->type) == 'p')
 		tab->f_hash = TRUE;
+	if (tab->f_perc_fmt && !tab->perc_len && \
+		(tab->type == 'd' || tab->type == 'i' || tab->type == 'u'))
+		tab->f_perc_shink = TRUE;
 }

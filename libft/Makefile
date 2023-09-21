@@ -61,7 +61,7 @@ AR			= ar
 RM			= rm -f
 
 # Define compiler flags
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 # Define archive creation flags
 # 	create, replace with object files and update symbol table
