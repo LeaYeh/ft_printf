@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:51:42 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 17:05:12 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:16:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	_setup_print_flags(t_print_tab *tab, const char *c)
 				tab->f_perc_shink = TRUE;
 			tab->perc_len = ft_atoi(c);
 		}
-		else if (!tab->width)
+		else if (!tab->width && !tab->perc_len)
 			tab->width = ft_atoi(c);
 	}
 }
@@ -93,6 +93,6 @@ void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
 	if (ft_tolower(tab->type) == 'p')
 		tab->f_hash = TRUE;
 	if (tab->f_perc_fmt && !tab->perc_len && \
-		(tab->type == 'd' || tab->type == 'i' || tab->type == 'u'))
+		(tab->type == 'd' || tab->type == 'i' || tab->type == 'u' || ft_tolower(tab->type) == 'x'))
 		tab->f_perc_shink = TRUE;
 }

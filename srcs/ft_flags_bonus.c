@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 17:19:07 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:06:24 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	_get_len_after_padding(char *context, t_print_tab *tab, t_bool is_perc)
 
 	if (ft_strncmp(context, "(null)", 6) == 0 && tab->f_perc_shink)
 		len = ft_strlen(context);
-	else if (tab->f_perc_shink && (is_perc || tab->type == 's'))
+	else if (tab->f_perc_shink && (is_perc || (tab->type == 's' && tab->perc_len)))
 		len = _get_shink_len(context, tab);
 	else if (is_perc)
 		len = tab->perc_len;
@@ -96,6 +96,10 @@ int	_get_len_after_padding(char *context, t_print_tab *tab, t_bool is_perc)
 
 t_bool	_is_pad_on_left(t_print_tab *tab, t_bool is_perc)
 {
+	if (tab->type == 'p' && !tab->f_dash)
+		return (TRUE);
+	else if (tab->type == 'p' && tab->f_dash)
+		return (FALSE);
 	if (!is_perc && (tab->f_dash || tab->f_hash))
 		return (FALSE);
 	if ((tab->type == 'd' || tab->type == 'i') && ft_strlen(tab->sign))
@@ -149,7 +153,7 @@ char	*_format_perc_num(char *num_str, t_print_tab *tab)
 
 char	*_format_perc_hex(char *num_str, t_print_tab *tab)
 {
-	if (ft_strlen(num_str) >= (size_t)tab->perc_len)
+	if (ft_strlen(num_str) >= (size_t)tab->perc_len && !tab->f_perc_shink)
 	{
 		if (ft_strncmp(tab->sign, "+", 1) == 0)
 			return (ft_strjoin(tab->sign, num_str));
@@ -171,7 +175,7 @@ char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab)
 
 	if (!s)
 		return (NULL);
-	if (!tab->f_hash || ft_strncmp(s, "0", 1) == 0)
+	if (!tab->f_hash || ft_strncmp(s, "0", 1) == 0  || ft_strncmp(s, "(nil)", 5) == 0)
 		return (ft_strdup(s));
 	if (is_upper)
 		ret = ft_strjoin("0X", s);
