@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:08:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 16:48:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 19:45:32 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	_print_out(const char *fmt, int i, t_print_tab *tab)
 	int		count;
 
 	ft_setup_print_table(fmt, i, tab);
-	formatted_str = ft_eval_format(tab);
+	if (tab->type == '\0')
+		formatted_str = ft_strdup("%");
+	else
+		formatted_str = ft_eval_format(tab);
 	count = 0;
 	while (count < tab->total_len)
 		ft_putchar_fd(formatted_str[count++], 1);

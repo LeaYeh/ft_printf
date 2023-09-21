@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:51:42 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:46:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 19:44:31 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,14 @@ void	ft_setup_print_table(const char *fmt, int start, t_print_tab *tab)
 		_setup_print_flags(tab, fmt + (start + i));
 		i += 1;
 	}
-	tab->fmt_len = i + 1;
 	tab->type = fmt[start + i];
+	if (tab->type == '\0')
+	{
+		tab->fmt_len = 0;
+		tab->total_len = 1;
+		return ;
+	}
+	tab->fmt_len = i + 1;
 	if (ft_tolower(tab->type) == 'x')
 		tab->sign = "";
 	if (ft_tolower(tab->type) == 'p')
