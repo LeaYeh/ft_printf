@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:38:10 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 22:16:54 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:53:45 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ char	*ft_format_padding(
 char	*ft_format_persicion(char *num_str, t_print_tab *tab);
 char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab);
 
-char	*ft_handle_null(t_print_tab *tab);
+char	*ft_pad_on_right(char *str, char pad, char type, size_t total_len);
+char	*ft_pad_on_left(char *str, char pad, char type, size_t total_len);
+int		ft_get_shink_len(char *context, t_print_tab *tab);
+int		ft_get_len_after_padding(
+			char *context, t_print_tab *tab, t_bool is_perc);
+t_bool	ft_is_pad_on_left(t_print_tab *tab, t_bool is_perc);
 
 #endif

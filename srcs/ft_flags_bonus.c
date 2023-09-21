@@ -6,106 +6,11 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:06:24 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:51:18 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*_pad_on_right(char *str, char pad, char type, size_t total_len)
-{
-	char	*ret;
-	int		len;
-	int		i;
-
-	ret = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (!ret || !str)
-		return (NULL);
-	len = ft_strlen(str);
-	if (type == 'c')
-		len = ft_max(2, 1, ft_strlen(str));
-	i = 0;
-	ft_memcpy(ret, str, len);
-	while (i < len)
-	{
-		if (str[i])
-			ret[i] = str[i];
-		i++;
-	}
-	while (i < total_len)
-	{
-		ret[i] = pad;
-		i++;
-	}
-	// ft_memset(ret + len, (int)pad, total_len - len);
-	ret[i] = '\0';
-	return (ret);
-}
-
-char	*_pad_on_left(char *str, char pad, char type, size_t total_len)
-{
-	char	*ret;
-	int		len;
-	int		i;
-
-	ret = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (!ret || !str)
-		return (NULL);
-	i = 0;
-	if (str[0] == '-' && pad == '0')
-		ret[i++] = '-';
-	len = ft_strlen(str + i);
-	if (type == 'c')
-		len = ft_max(2, 1, ft_strlen(str + i));
-	ft_memset(ret + i, (int)pad, total_len - len - i);
-	ft_memcpy(ret + (total_len - len), str + i, len);
-	ret[total_len] = '\0';
-	return (ret);
-}
-
-int		_get_shink_len(char *context, t_print_tab *tab)
-{
-	int	len;
-
-	len = ft_strlen(context);
-	if (tab->type == 'i' || tab->type == 'd' || tab->type == 'u' || \
-		ft_tolower(tab->type) == 'x')
-	{
-		if (*context++ == '0')
-			len--;
-	}
-	return (len);
-}
-
-int	_get_len_after_padding(char *context, t_print_tab *tab, t_bool is_perc)
-{
-	int	len;
-
-	if (ft_strncmp(context, "(null)", 6) == 0 && tab->f_perc_shink)
-		len = ft_strlen(context);
-	else if (tab->f_perc_shink && (is_perc || (tab->type == 's' && tab->perc_len)))
-		len = _get_shink_len(context, tab);
-	else if (is_perc)
-		len = tab->perc_len;
-	else if (tab->f_space_pad && tab->type != 's' && !ft_strlen(tab->sign))
-		len = ft_max(2, tab->width, 1 + ft_strlen(context));
-	else
-		len = tab->width;
-	return (len);
-}
-
-t_bool	_is_pad_on_left(t_print_tab *tab, t_bool is_perc)
-{
-	if (tab->type == 'p' && !tab->f_dash)
-		return (TRUE);
-	else if (tab->type == 'p' && tab->f_dash)
-		return (FALSE);
-	if (!is_perc && (tab->f_dash || tab->f_hash))
-		return (FALSE);
-	if ((tab->type == 'd' || tab->type == 'i') && ft_strlen(tab->sign))
-		return (TRUE);
-	return (TRUE);
-}
 
 char	*ft_format_padding(
 	char *str, char pad, t_print_tab *tab, t_bool is_perc)
@@ -115,17 +20,17 @@ char	*ft_format_padding(
 
 	if (!str)
 		return (NULL);
-	padded_len = _get_len_after_padding(str, tab, is_perc);
+	padded_len = ft_get_len_after_padding(str, tab, is_perc);
 	if (tab->f_perc_shink && is_perc)
 		str = str + (ft_strlen(str) - padded_len);
 	if ((!ft_strlen(str) && tab->type == 'c' && \
 			padded_len <= (int)ft_strlen(str)) || \
 			(int)ft_strlen(str) >= padded_len)
 		return (ft_strdup(str));
-	if (_is_pad_on_left(tab, is_perc))
-		ret = _pad_on_left(str, pad, tab->type, padded_len);
+	if (ft_is_pad_on_left(tab, is_perc))
+		ret = ft_pad_on_left(str, pad, tab->type, padded_len);
 	else
-		ret = _pad_on_right(str, pad, tab->type, padded_len);
+		ret = ft_pad_on_right(str, pad, tab->type, padded_len);
 	return (ret);
 }
 
@@ -175,7 +80,8 @@ char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab)
 
 	if (!s)
 		return (NULL);
-	if (!tab->f_hash || ft_strncmp(s, "0", 1) == 0  || ft_strncmp(s, "(nil)", 5) == 0)
+	if (!tab->f_hash || ft_strncmp(s, "0", 1) == 0 || \
+		ft_strncmp(s, "(nil)", 5) == 0)
 		return (ft_strdup(s));
 	if (is_upper)
 		ret = ft_strjoin("0X", s);
