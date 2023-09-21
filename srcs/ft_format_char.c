@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:58:27 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 17:22:42 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 14:24:57 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ char	*ft_format_char(char c, t_print_tab *tab)
 	char		arg_val[2];
 	const char	pad_char = ' ';
 
+	if (tab->type == '%')
+	{
+		tab->total_len = 1;
+		return (ft_strdup("%"));
+	}
 	tab->total_len = ft_max(2, tab->width, 1);
 	arg_val[0] = c;
 	arg_val[1] = '\0';
