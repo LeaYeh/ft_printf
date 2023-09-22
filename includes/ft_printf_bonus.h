@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:38:10 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:53:45 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 21:25:54 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -59,8 +59,8 @@ char	*ft_format_padding(
 char	*ft_format_persicion(char *num_str, t_print_tab *tab);
 char	*ft_format_suffix(char *s, t_bool is_upper, t_print_tab *tab);
 
-char	*ft_pad_on_right(char *str, char pad, char type, size_t total_len);
-char	*ft_pad_on_left(char *str, char pad, char type, size_t total_len);
+char	*ft_pad_on_right(char *str, char pad, char type, int total_len);
+char	*ft_pad_on_left(char *str, char pad, char type, int total_len);
 int		ft_get_shink_len(char *context, t_print_tab *tab);
 int		ft_get_len_after_padding(
 			char *context, t_print_tab *tab, t_bool is_perc);
