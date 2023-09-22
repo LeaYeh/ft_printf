@@ -10,6 +10,7 @@ MAIN_SRCS	:= ft_printf.c \
 			ft_print_int.c \
 			ft_print_uint.c \
 			ft_print_addr.c \
+			ft_print_hex.c \
 			ft_utils.c \
 			ft_utoa.c \
 			ft_utox.c
@@ -54,10 +55,10 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 all:		$(NAME)
 
-# bonus:		$(BONUS_OBJS)
-# 			@make -C $(LIBFT_DIR) bonus
-# 			@cp $(LIBFT_DIR)/*.a $(NAME)
-# 			$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJS) $(LIBFT_OBJS)
+bonus:		$(BONUS_OBJS)
+			@make -C $(LIBFT_DIR) bonus
+			@cp $(LIBFT_DIR)/*.a $(NAME)
+			$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJS) $(LIBFT_OBJS)
 
 clean:
 			@make -C $(LIBFT_DIR) clean

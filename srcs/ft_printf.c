@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:19:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 22:07:48 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 22:41:59 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	ft_print_format(char type, va_list *args)
 		ret = ft_print_uint(va_arg(*args, unsigned int));
 	else if (type == 'p')
 		ret = ft_print_addr(va_arg(*args, unsigned long int));
-	// else if (type == 'x')
-	// 	ret = ft_format_hex(va_arg(args, unsigned int), FALSE);
-	// else if (type == 'X')
-	// 	ret = ft_format_hex(va_arg(args, unsigned int), TRUE);
+	else if (type == 'x')
+		ret = ft_print_hex(va_arg(*args, unsigned int), FALSE);
+	else if (type == 'X')
+		ret = ft_print_hex(va_arg(*args, unsigned int), TRUE);
 	return (ret);
 }
 
@@ -91,6 +91,8 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		ret;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	ret = ft_printf_helper(format, &args);
 	va_end(args);
