@@ -1,23 +1,34 @@
 NAME		= libftprintf.a
-
+BUILD_DIR	:= build
 SRC_DIR		:= srcs
 INC_DIR		:= includes
 LIBFT_DIR	:= libft
 
-MAIN_SRCS	= ft_flags_bonus.c \
-			ft_flags_pad_utils.c \
-			ft_format_addr.c \
-			ft_format_char.c \
-			ft_format_hex.c \
-			ft_format_int.c \
-			ft_format_string.c \
-			ft_format_uint.c \
-			ft_printf.c \
-			ft_print_utils.c \
+MAIN_SRCS	:= ft_printf.c \
+			ft_print_char.c \
+			ft_print_string.c \
 			ft_utils.c \
 			ft_utoa.c \
 			ft_utox.c
-MAIN_OBJS	= ${MAIN_SRCS:.c=.o}
+
+BONUS_SRCS	:= ft_printf_bonus.c \
+			ft_flags_bonus.c \
+			ft_flags_pad_utils_bonus.c \
+			ft_format_addr_bonus.c \
+			ft_format_char_bonus.c \
+			ft_format_hex_bonus.c \
+			ft_format_int_bonus.c \
+			ft_format_string_bonus.c \
+			ft_format_uint_bonus.c \
+			ft_print_utils_bonus.c \
+			ft_utils.c \
+			ft_utoa.c \
+			ft_utox.c
+
+MAIN_SRCS := $(addprefix $(SRC_DIR)/, $(MAIN_SRCS))
+BONUS_SRCS := $(addprefix $(SRC_DIR)/, $(BONUS_SRCS))
+MAIN_OBJS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(MAIN_SRCS))
+BONUS_OBJS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(BONUS_SRCS))
 LIBFT_OBJS	:= $(LIBFT_DIR)/*.o	
 
 # Define the compiler and related tools
@@ -26,23 +37,24 @@ AR			= ar
 RM			= rm -f
 
 # Define flags
-CFLAGS		= 
+CFLAGS		= -Wall -Wextra -g -I$(INC_DIR) -I$(LIBFT_DIR)
 ARFLAGS		= -crs
-
-CFLAGS		+= -I$(INC_DIR) -I$(LIBFT_DIR)
 
 $(NAME):	$(MAIN_OBJS)
 			@make -C $(LIBFT_DIR) bonus
 			@cp $(LIBFT_DIR)/*.a $(NAME)
 			$(AR) $(ARFLAGS) $(NAME) $(MAIN_OBJS) $(LIBFT_OBJS)
 
-%.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 			@mkdir -p $(@D)
 			$(CC) $(CFLAGS) -c $< -o $@
 
 all:		$(NAME)
 
-bonus:		all
+bonus:		$(BONUS_OBJS)
+			@make -C $(LIBFT_DIR) bonus
+			@cp $(LIBFT_DIR)/*.a $(NAME)
+			$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJS) $(LIBFT_OBJS)
 
 clean:
 			@make -C $(LIBFT_DIR) clean
@@ -51,6 +63,9 @@ clean:
 fclean:		clean
 			@make -C $(LIBFT_DIR) fclean
 			$(RM) $(NAME)
+
+test:		$(MAIN_SRCS) $(NAME)
+			$(CC) $(CFLAGS) test.c $(MAIN_SRCS) -L$(LIBFT_DIR) -lft -o a.out
 
 re:			fclean all
 

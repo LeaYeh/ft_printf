@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:45:09 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 17:24:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 16:59:37 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_UTILS_H
 # include <unistd.h>
 # include <stdarg.h>
+# include <limits.h>
+# include <stdlib.h>
 # include "ft_boolean.h"
 
 int				ft_in_substr(const char c, const char *sub);
