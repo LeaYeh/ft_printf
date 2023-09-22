@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:19:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 21:23:09 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 21:49:01 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ft_print_format(char type, va_list *args)
 		ret = ft_print_char(va_arg(*args, int));
 	else if (type == 's')
 		ret = ft_print_string(va_arg(*args, char *));
-	// else if (type == 'd' || type == 'i')
-	// 	ret = ft_format_int(va_arg(args, int));
-	// else if (type == 'u')
-	// 	ret = ft_format_uint(va_arg(args, unsigned int));
+	else if (type == 'd' || type == 'i')
+		ret = ft_print_int(va_arg(*args, int));
+	else if (type == 'u')
+		ret = ft_print_uint(va_arg(*args, unsigned int));
 	// else if (type == 'p')
 	// 	ret = ft_format_addr(va_arg(args, unsigned long int));
 	// else if (type == 'x')
