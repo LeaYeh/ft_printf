@@ -41,7 +41,7 @@ AR			= ar
 RM			= rm -f
 
 # Define flags
-CFLAGS		= -Wall -Wextra -g -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INC_DIR) -I$(LIBFT_DIR)
 ARFLAGS		= -crs
 
 $(NAME):	$(MAIN_OBJS)

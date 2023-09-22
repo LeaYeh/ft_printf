@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:19:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 22:41:59 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 23:02:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_printf_helper(const char *fmt, va_list *args)
 		}
 		else
 			ret += ft_print_char(fmt[i]);
-			i++;
+		i++;
 	}
 	return (ret);
 }
