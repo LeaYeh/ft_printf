@@ -6,11 +6,11 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:56:58 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:51:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:03:21 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 char	*ft_format_padding(
 	char *str, char pad, t_print_tab *tab, t_bool is_perc)

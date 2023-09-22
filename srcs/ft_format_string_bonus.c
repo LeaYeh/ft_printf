@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_format_string.c                                 :+:      :+:    :+:   */
+/*   ft_format_string_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:01:22 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:44:08 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:03:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 char	*ft_format_string(char *s, t_print_tab *tab)
 {

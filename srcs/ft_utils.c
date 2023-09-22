@@ -6,11 +6,13 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:52:47 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/19 17:02:05 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:07:03 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+# include <stdarg.h>
+# include <limits.h>
+# include "ft_boolean.h"
 
 int	ft_in_substr(const char c, const char *sub)
 {

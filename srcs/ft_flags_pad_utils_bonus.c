@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flags_pad_utils.c                               :+:      :+:    :+:   */
+/*   ft_flags_pad_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:09:13 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/21 18:51:02 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:03:26 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 char	*ft_pad_on_right(char *str, char pad, char type, size_t total_len)
 {
