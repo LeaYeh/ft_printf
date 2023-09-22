@@ -71,6 +71,9 @@ fclean:		clean
 test:		$(MAIN_SRCS) $(NAME)
 			$(CC) $(CFLAGS) test.c $(MAIN_SRCS) -L$(LIBFT_DIR) -lft -o a.out
 
+test_b:		$(BONUS_SRCS) $(NAME)
+			$(CC) $(CFLAGS) test.c $(BONUS_SRCS) -L$(LIBFT_DIR) -lft -o a.out
+
 re:			fclean all
 
 # Define phony targets to avoid conflicts with file names

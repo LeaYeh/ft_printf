@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:08:03 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 22:14:10 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/22 22:58:10 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_print_addr(unsigned long int n)
 	char	*formatted_suffix;
 	int		len;
 
+	if ((void *)n == NULL)
+		return (write(1, "(nil)", 5));
 	num_str = ft_utox(n, FALSE);
 	formatted_suffix = _format_suffix(num_str, FALSE);
 	len = ft_strlen(formatted_suffix);
