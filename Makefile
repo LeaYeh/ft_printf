@@ -9,6 +9,7 @@ MAIN_SRCS	:= ft_printf.c \
 			ft_print_string.c \
 			ft_print_int.c \
 			ft_print_uint.c \
+			ft_print_addr.c \
 			ft_utils.c \
 			ft_utoa.c \
 			ft_utox.c
