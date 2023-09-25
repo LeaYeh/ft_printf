@@ -6,14 +6,12 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:12:08 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 22:38:53 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/25 17:12:13 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include "ft_boolean.h"

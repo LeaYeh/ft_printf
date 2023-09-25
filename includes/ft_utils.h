@@ -6,13 +6,12 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:45:09 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 16:59:37 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/25 16:58:54 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
-# include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
 # include <stdlib.h>
