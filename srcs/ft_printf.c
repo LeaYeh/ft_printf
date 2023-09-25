@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:19:02 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 23:02:55 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/25 17:15:00 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	ft_print_format(char type, va_list *args)
 		ret = ft_print_hex(va_arg(*args, unsigned int), FALSE);
 	else if (type == 'X')
 		ret = ft_print_hex(va_arg(*args, unsigned int), TRUE);
+	else
+	{
+		ret += ft_print_char('%');
+		ret += ft_print_char(type);
+	}
 	return (ret);
 }
 

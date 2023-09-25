@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:09:13 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/22 21:25:58 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/25 17:08:04 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_get_len_after_padding(char *context, t_print_tab *tab, t_bool is_perc)
 	if (ft_strncmp(context, "(null)", 6) == 0 && tab->f_perc_shink)
 		len = ft_strlen(context);
 	else if (tab->f_perc_shink && \
-		(is_perc || (tab->type == 's' && tab->perc_len)))
+		(is_perc || (tab->type == 's' && tab->perc_len && !tab->width)))
 		len = ft_get_shink_len(context, tab);
 	else if (is_perc)
 		len = tab->perc_len;
