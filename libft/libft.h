@@ -6,13 +6,12 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2023/09/10 12:47:43 by lyeh             ###   ########.fr       */
+/*   Updated: 2023/09/25 17:37:41 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <ctype.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
